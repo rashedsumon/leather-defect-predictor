@@ -41,6 +41,6 @@ def get_dataloaders(batch_size=32):
     train_dataset = datasets.ImageFolder(root=str(train_path), transform=train_transform)
     
     class_names = train_dataset.classes
-    train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=2)
+    train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True, num_workers=0) # 0 for stability in cloud environments
     
     return train_loader, class_names

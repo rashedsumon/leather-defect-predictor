@@ -8,7 +8,7 @@ class LeatherDefectClassifier(pl.LightningModule):
         super().__init__()
         self.save_hyperparameters()
         
-        # Lightweight MobileNetV3 for easy deployment without heavy hardware
+        # Lightweight MobileNetV3 backbone for optimized training and inference
         self.backbone = models.mobilenet_v3_small(weights=models.MobileNet_V3_Small_Weights.DEFAULT)
         in_features = self.backbone.classifier[3].in_features
         self.backbone.classifier[3] = nn.Linear(in_features, num_classes)
