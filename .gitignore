@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+.streamlit/
+.cache/
+data/
+
+# Model files now ignored in the root folder
+leather_model.pth
+classes.txt
