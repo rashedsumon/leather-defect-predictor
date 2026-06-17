@@ -86,6 +86,6 @@ if uploaded_file is not None and model is not None:
     if "good" in predicted_class.lower() or "perfect" in predicted_class.lower():
         st.success(f"🟢 **Status: Premium Grade / Flawless**")
     else:
-        st.error(f"🔴 **Status Defect Detected: {predicted_class.title()}**")
+        st.error(f"🔴 **Status: Defect Detected: **")
         
     
