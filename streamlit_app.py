@@ -88,4 +88,4 @@ if uploaded_file is not None and model is not None:
     else:
         st.error(f"🔴 **Status Defect Detected: {predicted_class.title()}**")
         
-    st.metric(label="Model Match Confidence", value=f"{confidence_score:.2f}%")
+    
