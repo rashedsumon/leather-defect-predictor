@@ -15,10 +15,19 @@ CLASSES_FILE = "classes.txt"
 
 @st.cache_resource
 def load_app_model():
-    """Loads classes and imports model mapping safely from the root path."""
+    """Checks for model assets. If missing, runs training pipeline automatically."""
     if not os.path.exists(MODEL_WEIGHTS) or not os.path.exists(CLASSES_FILE):
-        st.error("🚨 Model weights or classes file not found in root directory! Please run `train.py` first.")
-        return None, None
+        st.warning("⚠️ Model weights not found. Initializing auto-training pipeline on the cloud... This will take a few minutes.")
+        
+        # Import and run the main function from your train.py script
+        try:
+            import train
+            with st.spinner("⏳ Downloading dataset and training the AI model... Please wait."):
+                train.main()
+            st.success("🎉 Training complete! Loading model...")
+        except Exception as e:
+            st.error(f"❌ Auto-training failed: {e}")
+            return None, None
         
     with open(CLASSES_FILE, "r") as f:
         class_names = f.read().splitlines()
@@ -28,7 +37,6 @@ def load_app_model():
     model.load_state_dict(torch.load(MODEL_WEIGHTS, map_location=torch.device('cpu')))
     model.eval()
     return model, class_names
-
 model, class_names = load_app_model()
 
 # 3. Image Preprocessing Transform
