@@ -7,7 +7,7 @@ import os
 
 # Page configuration
 st.set_page_config(page_title="Leather Defect Detector", layout="centered")
-st.title("🏭 Leather Defect AI Classifier")
+st.title("🏭 Leather Defect Prediction")
 
 MODEL_WEIGHTS = "leather_model.pth"
 CLASSES_FILE = "classes.txt"
@@ -38,10 +38,10 @@ def run_inline_training():
 def load_app_model():
     """Checks for model assets. If missing, triggers training seamlessly."""
     if not os.path.exists(MODEL_WEIGHTS) or not os.path.exists(CLASSES_FILE):
-        st.warning("⚠️ Weights not found! Initializing automated training on Streamlit Cloud...")
+        
         with st.spinner("⏳ Downloading Kaggle dataset & training architecture (This can take 2-4 minutes)..."):
             run_inline_training()
-        st.success("🎉 Model trained successfully!")
+        
         
     with open(CLASSES_FILE, "r") as f:
         class_names = f.read().splitlines()
